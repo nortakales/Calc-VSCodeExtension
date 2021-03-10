@@ -3,6 +3,7 @@
 	"displayName": "Calc",
 	"description": "Displays calculations per line of your input file. For example, if a line contains 1+1, the corresponding result line will show 2.",
 	"version": "0.0.1",
+	"publisher": "nortakales",
 	"engines": {
 		"vscode": "^1.53.0"
 	},
@@ -10,14 +11,32 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:calc.helloWorld"
+		"onCommand:calc.showResults",
+		"onCustomEditor:calc.document"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nortakales/Calc-VSCodeExtension.git"
+	},
 	"main": "./out/extension.js",
 	"contributes": {
+		"customEditors": [
+			{
+				"viewType": "calc.document",
+				"displayName": "Calc Results",
+				"selector": [
+					{
+						"filenamePattern": "*"
+						
+					}
+				]
+			}
+		],
 		"commands": [
 			{
-				"command": "calc.helloWorld",
-				"title": "Hello World"
+				"command": "calc.showResults",
+				"title": "Shows results for current file",
+				"category": "Calc"
 			}
 		]
 	},
@@ -25,9 +44,7 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
+		"lint": "eslint src --ext ts"
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.53.0",
