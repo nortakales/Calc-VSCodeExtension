@@ -53,6 +53,10 @@ export class CalcEditorProvider implements vscode.CustomTextEditorProvider {
 
     private getHtmlForWebview(webview: vscode.Webview): string {
 
+        // https://github.com/microsoft/vscode-extension-samples/tree/main/webview-sample
+        // https://code.visualstudio.com/api/extension-guides/webview
+        // https://github.com/nortakales/Calc-VSCodeExtension
+
         const scriptSrc = webview.asWebviewUri(vscode.Uri.file(path.join(this.context.extensionPath, 'resources', 'js', 'main.js')));
         const stylesPath = webview.asWebviewUri(vscode.Uri.file(path.join(this.context.extensionPath, 'resources', 'css', 'main.css')));
 
