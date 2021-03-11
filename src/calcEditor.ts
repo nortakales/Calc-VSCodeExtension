@@ -53,7 +53,8 @@ export class CalcEditorProvider implements vscode.CustomTextEditorProvider {
 
     private getHtmlForWebview(webview: vscode.Webview): string {
 
-        const scriptSrc = webview.asWebviewUri(vscode.Uri.file(path.join(this.context.extensionPath, 'js', 'main.js')));
+        const scriptSrc = webview.asWebviewUri(vscode.Uri.file(path.join(this.context.extensionPath, 'resources', 'js', 'main.js')));
+        const stylesPath = webview.asWebviewUri(vscode.Uri.file(path.join(this.context.extensionPath, 'resources', 'css', 'main.css')));
 
         return /* html */`
             <!DOCTYPE html>
@@ -62,10 +63,14 @@ export class CalcEditorProvider implements vscode.CustomTextEditorProvider {
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Calc Webview</title>
+                    
+				    <link href="${stylesPath}" rel="stylesheet">
                 </head>
+                
                 <body>
-                    <div id="content" contenteditable="true">
-                        Hello world!
+                    <div id="flow-container">
+                        <div id="editor" contenteditable="true">Hello world!</div>
+                        <div id="tape"></div>
                     </div>
                     <script src="${scriptSrc}></script>
                 </body>
